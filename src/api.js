@@ -1,13 +1,15 @@
 import { STORAGE_KEYS, DEFAULT_PROMPT_TEMPLATE, MODELS, LANGUAGES, ACCENT_COLORS } from './constants'
 
 function loadSettings() {
+  const deviceTheme = globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
   return {
     apiKey: localStorage.getItem(STORAGE_KEYS.API_KEY) || '',
     model: localStorage.getItem(STORAGE_KEYS.MODEL) || MODELS[0],
     promptTemplate: localStorage.getItem(STORAGE_KEYS.PROMPT_TEMPLATE) || DEFAULT_PROMPT_TEMPLATE,
     sourceLanguage: localStorage.getItem(STORAGE_KEYS.SOURCE_LANGUAGE) || LANGUAGES[0],
     targetLanguage: localStorage.getItem(STORAGE_KEYS.TARGET_LANGUAGE) || 'English',
-    theme: localStorage.getItem(STORAGE_KEYS.THEME) || 'dark',
+    theme: localStorage.getItem(STORAGE_KEYS.THEME) || deviceTheme,
     accentColor: localStorage.getItem(STORAGE_KEYS.ACCENT_COLOR) || 'Purple',
   }
 }
