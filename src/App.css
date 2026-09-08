@@ -328,14 +328,14 @@
   height: 36px;
   border: none;
   border-radius: 8px;
-  background: var(--primary);
+  background: var(--primary-background);
   color: #fff;
   flex-shrink: 0;
   transition: background 0.15s, opacity 0.15s;
 }
 
 .send-btn:hover:not(:disabled) {
-  background: var(--primary-hover);
+  background: var(--primary-hover-background);
 }
 
 .send-btn:disabled {
@@ -695,7 +695,7 @@
 }
 
 .theme-toggle-btn.active {
-  background: var(--primary);
+  background: var(--primary-background);
   color: #fff;
   border-color: var(--primary);
 }
@@ -708,11 +708,12 @@
 }
 
 .swatch {
+  position: relative;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid transparent;
-  transition: border-color 0.15s, transform 0.15s;
+  border: none;
+  transition: transform 0.15s;
 }
 
 .swatch:hover {
@@ -720,8 +721,25 @@
 }
 
 .swatch.active {
-  border-color: var(--text);
-  box-shadow: 0 0 0 2px var(--bg);
+  transform: scale(1.08);
+}
+
+.swatch.active::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--text);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.swatch:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--primary);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .field input,
@@ -773,7 +791,7 @@
   padding: 8px 20px;
   border: none;
   border-radius: 8px;
-  background: var(--primary);
+  background: var(--primary-background);
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -781,7 +799,7 @@
 }
 
 .btn-primary:hover {
-  background: var(--primary-hover);
+  background: var(--primary-hover-background);
 }
 
 .btn-danger {

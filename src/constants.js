@@ -6,7 +6,7 @@ Rules:
 - Preserve the original tone, meaning, and formatting
 - Return ONLY the translated text with no explanations, no notes, and no additional commentary`
 
-export const APP_VERSION = 'v0.0.1'
+export const APP_VERSION = 'v0.0.2'
 
 export const MODELS = [
   'openai/gpt-4o',
@@ -69,6 +69,15 @@ export const ACCENT_COLORS = {
   Slate:    { primary: '#64748b', hover: '#7889a0' },
   Emerald:  { primary: '#059669', hover: '#17aa7c' },
   Lavender: { primary: '#a78bfa', hover: '#b49ffc' },
+  Sunrise:  { primary: '#e76f51', hover: '#f4a261', gradient: 'linear-gradient(135deg, #e76f51, #f4a261)' },
+  Lagoon:   { primary: '#0077b6', hover: '#00b4d8', gradient: 'linear-gradient(135deg, #0077b6, #00b4d8)' },
+  Aurora:   { primary: '#2a9d8f', hover: '#80ed99', gradient: 'linear-gradient(135deg, #2a9d8f, #80ed99)' },
+  Candy:    { primary: '#d63384', hover: '#ff85a1', gradient: 'linear-gradient(135deg, #d63384, #ff85a1)' },
+  Fire:     { primary: '#d00000', hover: '#ffba08', gradient: 'linear-gradient(135deg, #d00000, #ffba08)' },
+  Twilight: { primary: '#4361ee', hover: '#7209b7', gradient: 'linear-gradient(135deg, #4361ee, #7209b7)' },
+  Citrus:   { primary: '#65a30d', hover: '#facc15', gradient: 'linear-gradient(135deg, #65a30d, #facc15)' },
+  Prism:    { primary: '#0891b2', hover: '#db2777', gradient: 'linear-gradient(135deg, #0891b2, #7c3aed, #db2777)' },
+  Cosmos:   { primary: '#4338ca', hover: '#ec4899', gradient: 'linear-gradient(135deg, #4338ca, #ec4899)' },
 }
 
 export const STORAGE_KEYS = {

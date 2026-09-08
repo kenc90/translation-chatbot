@@ -294,11 +294,11 @@ function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemo
           <div className="field">
             <span>Accent Color</span>
             <div className="accent-swatches">
-              {Object.entries(ACCENT_COLORS).map(([name, { primary }]) => (
+              {Object.entries(ACCENT_COLORS).map(([name, { primary, gradient }]) => (
                 <button
                   key={name}
                   className={`swatch ${draft.accentColor === name ? 'active' : ''}`}
-                  style={{ backgroundColor: primary }}
+                  style={{ background: gradient || primary }}
                   onClick={() => setDraft({ ...draft, accentColor: name })}
                   aria-label={name}
                   title={name}
@@ -511,6 +511,8 @@ export default function App() {
     const color = ACCENT_COLORS[settings.accentColor] || ACCENT_COLORS.Purple
     document.documentElement.style.setProperty('--primary', color.primary)
     document.documentElement.style.setProperty('--primary-hover', color.hover)
+    document.documentElement.style.setProperty('--primary-background', color.gradient || color.primary)
+    document.documentElement.style.setProperty('--primary-hover-background', color.gradient || color.hover)
   }, [settings.theme, settings.accentColor])
 
   const recordRecentModel = (model) => {

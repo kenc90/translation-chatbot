@@ -9,6 +9,8 @@
   --text-muted: #8888aa;
   --primary: #6c5ce7;
   --primary-hover: #7e6ff0;
+  --primary-background: var(--primary);
+  --primary-hover-background: var(--primary-hover);
   --user-bubble: color-mix(in srgb, var(--primary) 28%, var(--surface));
   --ai-bubble: color-mix(in srgb, var(--primary) 10%, var(--surface));
   --error: #ff6b6b;
