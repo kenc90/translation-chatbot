@@ -1,0 +1,10 @@
+# IDE
+.qoder/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+/node_modules
