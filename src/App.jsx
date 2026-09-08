@@ -137,6 +137,27 @@ function ModalOverlay({ className = '', onClose, children }) {
   )
 }
 
+function ClearChatModal({ open, onConfirm, onClose }) {
+  if (!open) return null
+
+  return (
+    <ModalOverlay onClose={onClose}>
+      <div className="modal confirm-modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>Clear chat?</h2>
+        </div>
+        <div className="modal-body">
+          <p>This will permanently delete all messages in this chat.</p>
+        </div>
+        <div className="modal-footer">
+          <button className="btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn-danger" onClick={onConfirm}>Clear chat</button>
+        </div>
+      </div>
+    </ModalOverlay>
+  )
+}
+
 /* ─── Model Search Modal ─── */
 function formatPrice(perToken) {
   const n = parseFloat(perToken)
@@ -468,6 +489,7 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [showSettings, setShowSettings] = useState(false)
+  const [showClearConfirmation, setShowClearConfirmation] = useState(false)
   const [recentModels, setRecentModels] = useState(loadRecentModels)
   const [retranslatingIndex, setRetranslatingIndex] = useState(null)
 
@@ -579,6 +601,7 @@ export default function App() {
   const handleClearChat = () => {
     setMessages([])
     localStorage.removeItem(STORAGE_KEYS.MESSAGES)
+    setShowClearConfirmation(false)
   }
 
   return (
@@ -591,7 +614,7 @@ export default function App() {
         </div>
         <div className="topbar-right">
           {messages.length > 0 && (
-            <button className="btn-icon clear-btn" onClick={handleClearChat} aria-label="Clear chat" title="Clear chat">
+            <button className="btn-icon clear-btn" onClick={() => setShowClearConfirmation(true)} aria-label="Clear chat" title="Clear chat">
               <TrashIcon />
             </button>
           )}
@@ -662,6 +685,12 @@ export default function App() {
           </button>
         </div>
       </footer>
+
+      <ClearChatModal
+        open={showClearConfirmation}
+        onConfirm={handleClearChat}
+        onClose={() => setShowClearConfirmation(false)}
+      />
 
       {/* Settings Modal */}
       <SettingsModal

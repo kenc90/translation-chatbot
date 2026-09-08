@@ -397,6 +397,14 @@
   border-top: 1px solid var(--border);
 }
 
+.confirm-modal {
+  max-width: 400px;
+}
+
+.confirm-modal .modal-body {
+  color: var(--text-muted);
+}
+
 /* ─── Model Input Row ─── */
 .model-input-row {
   display: flex;
@@ -774,6 +782,21 @@
 
 .btn-primary:hover {
   background: var(--primary-hover);
+}
+
+.btn-danger {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--error);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+
+.btn-danger:hover {
+  opacity: 0.85;
 }
 
 .btn-secondary {
