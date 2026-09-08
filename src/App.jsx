@@ -400,16 +400,15 @@ function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemo
 
 /* ─── Chat Message ─── */
 function Message({ msg, onRetranslate, busy }) {
-  const [copied, setCopied] = useState(false)
+  const [copiedVariant, setCopiedVariant] = useState(null)
   const variants = [msg.content, ...(msg.alternatives || [])]
-  const latest = variants[variants.length - 1]
   const isAssistant = msg.role === 'assistant'
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(latest)
+  const handleCopy = (text, index) => {
+    navigator.clipboard.writeText(text)
       .then(() => {
-        setCopied(true)
-        setTimeout(() => setCopied(false), 1500)
+        setCopiedVariant(index)
+        setTimeout(() => setCopiedVariant(null), 1500)
       })
       .catch(() => {})
   }
@@ -432,21 +431,23 @@ function Message({ msg, onRetranslate, busy }) {
                 {busy ? <Spinner /> : <RefreshIcon />}
               </button>
             )}
-            <button
-              type="button"
-              className={`bubble-copy-btn ${copied ? 'copied' : ''}`}
-              onClick={handleCopy}
-              aria-label="Copy text"
-              title={copied ? 'Copied!' : 'Copy'}
-            >
-              {copied ? <CheckIcon /> : <CopyIcon />}
-            </button>
           </div>
         </div>
         {variants.map((v, i) => (
           <div key={i}>
             {i > 0 && <div className="bubble-divider" />}
-            <div className="bubble-text">{v}</div>
+            <div className="bubble-result">
+              <div className="bubble-text">{v}</div>
+              <button
+                type="button"
+                className={`bubble-copy-btn ${copiedVariant === i ? 'copied' : ''}`}
+                onClick={() => handleCopy(v, i)}
+                aria-label="Copy translation"
+                title={copiedVariant === i ? 'Copied!' : 'Copy'}
+              >
+                {copiedVariant === i ? <CheckIcon /> : <CopyIcon />}
+              </button>
+            </div>
           </div>
         ))}
       </div>

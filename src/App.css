@@ -220,6 +220,21 @@
   color: var(--text);
 }
 
+.bubble-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.bubble-result .bubble-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.bubble-result .bubble-copy-btn {
+  flex-shrink: 0;
+}
+
 .loading-indicator {
   display: flex;
   align-items: center;
