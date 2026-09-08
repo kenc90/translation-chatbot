@@ -9,8 +9,8 @@
   --text-muted: #8888aa;
   --primary: #6c5ce7;
   --primary-hover: #7e6ff0;
-  --user-bubble: #2d2a5e;
-  --ai-bubble: #1e1e30;
+  --user-bubble: color-mix(in srgb, var(--primary) 28%, var(--surface));
+  --ai-bubble: color-mix(in srgb, var(--primary) 10%, var(--surface));
   --error: #ff6b6b;
   --radius: 12px;
 }
@@ -22,8 +22,8 @@
   --border: #d8d8e0;
   --text: #1a1a2e;
   --text-muted: #6b6b80;
-  --user-bubble: #e8e6f8;
-  --ai-bubble: #f0f0f5;
+  --user-bubble: color-mix(in srgb, var(--primary) 18%, var(--surface));
+  --ai-bubble: color-mix(in srgb, var(--primary) 6%, var(--surface));
   --error: #d63031;
 }
 
