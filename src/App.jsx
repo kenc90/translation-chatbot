@@ -587,7 +587,7 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-left">
           <span className="logo"><GlobeIcon /></span>
-          <h1>Translation Chatbot</h1>
+          <h1>Translation Chatbot <span className="app-version">v1.0.0</span></h1>
         </div>
         <div className="topbar-right">
           {messages.length > 0 && (
