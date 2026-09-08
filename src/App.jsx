@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { loadSettings, saveSettings, translate, loadRecentModels, addRecentModel, removeRecentModel, fetchModels } from './api.js'
-import { DEFAULT_PROMPT_TEMPLATE, LANGUAGES, THEMES, ACCENT_COLORS, STORAGE_KEYS } from './constants.js'
+import { APP_VERSION, DEFAULT_PROMPT_TEMPLATE, LANGUAGES, THEMES, ACCENT_COLORS, STORAGE_KEYS } from './constants.js'
 import './App.css'
 
 function SettingsIcon() {
@@ -610,7 +610,7 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-left">
           <span className="logo"><GlobeIcon /></span>
-          <h1>Translation Chatbot <span className="app-version">v1.0.0</span></h1>
+          <h1>Translation Chatbot <span className="app-version">{APP_VERSION}</span></h1>
         </div>
         <div className="topbar-right">
           {messages.length > 0 && (

@@ -6,6 +6,8 @@ Rules:
 - Preserve the original tone, meaning, and formatting
 - Return ONLY the translated text with no explanations, no notes, and no additional commentary`
 
+export const APP_VERSION = 'v0.0.1'
+
 export const MODELS = [
   'openai/gpt-4o',
   'openai/gpt-4o-mini',
