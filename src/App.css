@@ -2,7 +2,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -14,6 +14,10 @@
   justify-content: space-between;
   padding: 14px 20px;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
 }
 
 .topbar-left {
@@ -87,7 +91,6 @@
 /* ─── Chat Area ─── */
 .chat-area {
   flex: 1;
-  overflow-y: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -287,6 +290,10 @@
 .input-area {
   padding: 16px 20px;
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: var(--bg);
 }
 
 .input-wrapper {
@@ -878,15 +885,15 @@
 }
 
 /* ─── Scrollbar ─── */
-.chat-area::-webkit-scrollbar {
+html::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-area::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.chat-area::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 3px;
 }
