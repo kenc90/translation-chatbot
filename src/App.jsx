@@ -544,6 +544,9 @@ export default function App() {
   const [showClearConfirmation, setShowClearConfirmation] = useState(false)
   const [recentModels, setRecentModels] = useState(loadRecentModels)
   const [retranslatingIndex, setRetranslatingIndex] = useState(null)
+  const [isStandalone, setIsStandalone] = useState(
+    typeof window !== 'undefined' && !!window.navigator.standalone
+  )
 
   const chatEndRef = useRef(null)
   const textareaRef = useRef(null)
@@ -659,7 +662,7 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app${isStandalone ? ' standalone' : ''}`}>
       {/* Top Bar */}
       <header className="topbar">
         <div className="topbar-left">
