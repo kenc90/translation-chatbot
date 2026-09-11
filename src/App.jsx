@@ -567,27 +567,6 @@ export default function App() {
     document.documentElement.style.setProperty('--primary-hover-background', color.gradient || color.hover)
   }, [settings.theme, settings.accentColor])
 
-  // Apply iOS safe-area insets as CSS variables (handles notch/home indicator)
-  useEffect(() => {
-    const applySafeArea = () => {
-      const root = document.documentElement
-      const top = getComputedStyle(root).getPropertyValue('--sat') || '0px'
-      const bottom = getComputedStyle(root).getPropertyValue('--sab') || '0px'
-      // Read from env() via a probe element
-      const probe = document.createElement('div')
-      probe.style.cssText = 'position:fixed;top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);left:0;right:0;visibility:hidden;pointer-events:none;'
-      document.body.appendChild(probe)
-      const sat = getComputedStyle(probe).top
-      const sab = getComputedStyle(probe).bottom
-      probe.remove()
-      root.style.setProperty('--sat', sat)
-      root.style.setProperty('--sab', sab)
-    }
-    applySafeArea()
-    window.addEventListener('resize', applySafeArea)
-    return () => window.removeEventListener('resize', applySafeArea)
-  }, [])
-
   const recordRecentModel = (model) => {
     const updated = addRecentModel(model)
     setRecentModels(updated)

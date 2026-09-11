@@ -13,7 +13,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  padding-top: calc(14px + var(--sat, 0px));
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -290,7 +289,6 @@
 /* ─── Input Area ─── */
 .input-area {
   padding: 16px 20px;
-  padding-bottom: calc(16px + var(--sab, 0px));
   flex-shrink: 0;
   position: sticky;
   bottom: 0;
@@ -922,9 +920,9 @@ html::-webkit-scrollbar-thumb {
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
   .app { max-width: 100%; }
-  .topbar { padding: 12px 14px; }
+  .topbar { padding: 12px 14px; padding-top: 44px; }
   .chat-area { padding: 14px; }
-  .input-area { padding: 12px 14px; }
+  .input-area { padding: 12px 14px; padding-bottom: 34px; }
   .bubble { max-width: 92%; }
   .modal { border-radius: 12px; }
   .modal-header { padding: 16px 18px 10px; }
