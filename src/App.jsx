@@ -260,16 +260,18 @@ function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemo
   const [credits, setCredits] = useState(null)
   const [creditsLoading, setCreditsLoading] = useState(false)
   const [creditsError, setCreditsError] = useState('')
+  const hasAutoFetched = useRef(false)
 
   useEffect(() => { if (open) setDraft(settings) }, [open, settings])
 
-  // Fetch OpenRouter credit balance when the modal opens, if an API key is set
+  // Auto-fetch OpenRouter credit balance only the first time the modal opens,
+  // and only if an API key is set. After that, the user refreshes manually.
   useEffect(() => {
-    if (!open) return
-    setCredits(null)
-    setCreditsError('')
+    if (!open || hasAutoFetched.current) return
     const apiKey = settings.apiKey?.trim()
     if (!apiKey) return
+    hasAutoFetched.current = true
+    setCreditsError('')
     let cancelled = false
     setCreditsLoading(true)
     fetchCredits(apiKey)
