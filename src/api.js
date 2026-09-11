@@ -81,6 +81,20 @@ export async function fetchModels() {
   return data.data || []
 }
 
+export async function fetchCredits(apiKey) {
+  const response = await fetch('https://openrouter.ai/api/v1/credits', {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  })
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}))
+    throw new Error(err?.error?.message || `Failed to load credits: ${response.status}`)
+  }
+  const data = await response.json()
+  return data?.data || null
+}
+
 export { loadSettings, saveSettings, loadRecentModels, addRecentModel, removeRecentModel }
 
 function loadRecentModels() {

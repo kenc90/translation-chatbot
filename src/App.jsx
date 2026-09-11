@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { loadSettings, saveSettings, translate, loadRecentModels, addRecentModel, removeRecentModel, fetchModels } from './api.js'
+import { loadSettings, saveSettings, translate, loadRecentModels, addRecentModel, removeRecentModel, fetchModels, fetchCredits } from './api.js'
 import { APP_VERSION, DEFAULT_PROMPT_TEMPLATE, LANGUAGES, THEMES, ACCENT_COLORS, STORAGE_KEYS } from './constants.js'
 import './App.css'
 
@@ -257,8 +257,38 @@ function ModelSearchModal({ open, selectedModel, onSelect, onClose }) {
 function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemoveRecentModel, onSave, onClose }) {
   const [draft, setDraft] = useState(settings)
   const [showModelSearch, setShowModelSearch] = useState(false)
+  const [credits, setCredits] = useState(null)
+  const [creditsLoading, setCreditsLoading] = useState(false)
+  const [creditsError, setCreditsError] = useState('')
 
   useEffect(() => { if (open) setDraft(settings) }, [open, settings])
+
+  // Fetch OpenRouter credit balance when the modal opens, if an API key is set
+  useEffect(() => {
+    if (!open) return
+    setCredits(null)
+    setCreditsError('')
+    const apiKey = settings.apiKey?.trim()
+    if (!apiKey) return
+    let cancelled = false
+    setCreditsLoading(true)
+    fetchCredits(apiKey)
+      .then(data => { if (!cancelled) setCredits(data) })
+      .catch(err => { if (!cancelled) setCreditsError(err.message) })
+      .finally(() => { if (!cancelled) setCreditsLoading(false) })
+    return () => { cancelled = true }
+  }, [open, settings.apiKey])
+
+  const refreshCredits = () => {
+    const apiKey = settings.apiKey?.trim()
+    if (!apiKey || creditsLoading) return
+    setCreditsError('')
+    setCreditsLoading(true)
+    fetchCredits(apiKey)
+      .then(data => setCredits(data))
+      .catch(err => setCreditsError(err.message))
+      .finally(() => setCreditsLoading(false))
+  }
 
   if (!open) return null
 
@@ -315,6 +345,26 @@ function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemo
               value={draft.apiKey}
               onChange={e => setDraft({ ...draft, apiKey: e.target.value })}
             />
+            {creditsLoading && (
+              <span className="field-hint credit-status"><Spinner /> Checking credit balance...</span>
+            )}
+            {!creditsLoading && credits && (
+              <span className="field-hint credit-status">
+                Remaining credit: <strong>${Number((credits.total_credits || 0) - (credits.total_usage || 0)).toFixed(2)}</strong>
+                <button
+                  type="button"
+                  className="credit-refresh-btn"
+                  onClick={refreshCredits}
+                  aria-label="Refresh credit balance"
+                  title="Refresh credit balance"
+                >
+                  <RefreshIcon />
+                </button>
+              </span>
+            )}
+            {!creditsLoading && creditsError && (
+              <span className="field-hint credit-status credit-error">{creditsError}</span>
+            )}
           </label>
 
           <label className="field">

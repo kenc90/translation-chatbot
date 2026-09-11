@@ -586,6 +586,50 @@
   opacity: 0.8;
 }
 
+.credit-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.credit-status strong {
+  color: var(--text);
+  opacity: 1;
+}
+
+.credit-error {
+  color: var(--danger, #e5484d);
+  opacity: 1;
+}
+
+.credit-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  margin-left: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.credit-refresh-btn:hover {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.credit-refresh-btn:active svg {
+  transform: rotate(180deg);
+}
+
+.credit-refresh-btn svg {
+  transition: transform 0.3s ease;
+}
+
 .field-row {
   display: flex;
   align-items: center;
