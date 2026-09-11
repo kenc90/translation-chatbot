@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
+  padding-top: calc(14px + env(safe-area-inset-top));
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -289,6 +290,7 @@
 /* ─── Input Area ─── */
 .input-area {
   padding: 16px 20px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
   flex-shrink: 0;
   position: sticky;
   bottom: 0;
