@@ -254,7 +254,7 @@ function ModelSearchModal({ open, selectedModel, onSelect, onClose }) {
 }
 
 /* ─── Settings Modal ─── */
-function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemoveRecentModel, onSave, onClose }) {
+function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemoveRecentModel, onSave, onClose, isStandalone }) {
   const [draft, setDraft] = useState(settings)
   const [showModelSearch, setShowModelSearch] = useState(false)
   const [credits, setCredits] = useState(null)
@@ -455,6 +455,11 @@ function SettingsModal({ open, settings, recentModels, onPickRecentModel, onRemo
         </div>
 
         <div className="modal-footer">
+          {isStandalone && (
+            <button className="btn-secondary refresh-app-btn" onClick={() => window.location.reload()}>
+              <RefreshIcon /> Refresh app
+            </button>
+          )}
           <button className="btn-secondary" onClick={onClose}>Cancel</button>
           <button className="btn-primary" onClick={handleSave}>Save</button>
         </div>
@@ -758,6 +763,7 @@ export default function App() {
         onRemoveRecentModel={handleRemoveRecentModel}
         onSave={handleSaveSettings}
         onClose={() => setShowSettings(false)}
+        isStandalone={isStandalone}
       />
     </div>
   )
