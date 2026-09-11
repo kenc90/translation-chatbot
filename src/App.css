@@ -391,6 +391,7 @@
 .modal-body {
   padding: 8px 24px 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -717,6 +718,15 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.field-row-languages .field {
+  min-width: 0;
+}
+
+.field-row-languages select {
+  width: 100%;
+  min-width: 0;
 }
 
 /* ─── Theme Toggle ─── */
